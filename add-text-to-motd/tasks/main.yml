@@ -1,0 +1,14 @@
+---
+# tasks file for add-text-to-motd
+  - name: Print the test variable
+    debug:
+      var: test
+  - name: date and time
+    ansible.builtin.debug:
+      var: ansible_date_time
+  - name: Edit motd file
+    become: true
+    lineinfile:
+      path: /etc/motd
+      line: "This is a new line from 20 March! #1 {{ ansible_date_time.iso8601 }}"
+      insertbefore: BOF
